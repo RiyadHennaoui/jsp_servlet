@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class Login
@@ -35,28 +36,12 @@ public class Login extends HttpServlet {
 		if(login == null) login ="";
 		if(password == null) password = "";
 		
-		  response.setContentType("text/html");
-	        try (PrintWriter out = response.getWriter()) {
-	            out.println("<!DOCTYPE html>");
-	            out.println("<html>");
-	            out.println("<header>");
-	            out.println("<title>Veuillez vous indentifier</title>");
-	            out.println("<link rel='stylesheet' type='text/css' href='styles.css'/>");
-	            out.println("</header>");
-	            out.println("<body>");
-	            out.println("<h1>Veuillez vous identifier</h1>");
-	            out.println("<h2>" + new Date() +  "</h2>");
-	            out.println("<form method='post' action='login'>");
-	            out.println("<label for='txtLogin'>Login : </label>");
-	            out.println("<input name='txtLogin' type='text' value='" + login+"'autofocus /> <br/>");
-	            out.println("<label for='txtPassword'>Password : </label>");
-	            out.println("<input name='txtPassword' type='password' value='" + password + "'/> </br>");
-	            out.println("<br/>");
-	            out.println("<input name='btnConnect' type='submit'/> <br/>");
-	            out.println("</form>");
-	            out.println("</body>");
-	            out.println("</html>");
-	        }
+	
+		HttpSession session = request.getSession(true);
+		session.setAttribute("login", login);
+		session.setAttribute("password", password);
+		
+		request.getRequestDispatcher("/Loggin.jsp").forward(request, response);
 	}
 
 	/**
@@ -69,13 +54,10 @@ public class Login extends HttpServlet {
 		
 		if(login.equals("bond")&& password.equals("007")){
 			
-			response.setContentType("text/html");
-			try(PrintWriter out = response.getWriter()){
-				out.println("Bravo !");
-			}
+			request.getRequestDispatcher("/Connected.jsp").forward(request, response);
 			
 		}else {
-			doGet(request, response);
+			request.getRequestDispatcher("/Login.jsp").forward(request, response);
 		}
 	}
 
