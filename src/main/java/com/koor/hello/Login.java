@@ -49,15 +49,21 @@ public class Login extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		System.out.println("dans le doPost");
 		String login = request.getParameter("txtLogin");
 		String password = request.getParameter("txtPassword");
+		
+		HttpSession session = request.getSession(true);
+		session.setAttribute("login", login);
+		session.setAttribute("password", password);
 		
 		if(login.equals("bond")&& password.equals("007")){
 			
 			request.getRequestDispatcher("/Connected.jsp").forward(request, response);
-			
+			session.setAttribute("isConnected", true);
 		}else {
 			request.getRequestDispatcher("/Login.jsp").forward(request, response);
+			session.setAttribute("isConnected", false);
 		}
 	}
 

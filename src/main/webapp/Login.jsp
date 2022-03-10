@@ -5,37 +5,24 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Veuillez vous authentifier</title>
 <link rel='stylesheet' type='text/css' href='styles.css'/>
 </head>
 <body>
 	<h1>Veuillez vous authentifier</h1>
-	<h2><%= new Date() %></h2>
 	
-	<form method="post">
-	<%
-	String login = request.getParameter("txtLogin");
-	String password = request.getParameter("txtPassword");
-	if(login == null) login ="";
-	if(password == null) password = "";
 	
-	if(request.getMethod().equals("POST") && login.equals("bond") && password.equals("007")){
-		
-
-	%>
+	<form method="post" action="login">
 	
-	<p>Welcome <%= login %> </p>
-	
-	<%}else { %>
 	
 	<label for='txtLogin'>Login : </label>
-		<input name='txtLogin' type='text' value=''autofocus /> <br/>
+		<input name='txtLogin' type='text' value='${login}'autofocus /> <br/>
 		<label for='txtPassword'>Password : </label>
-	    <input name='txtPassword' type='password' value=''/> <br/>
+	    <input name='txtPassword' type='password' value='${password}'/> <br/>
 	    <br/>
 	    <input name='btnConnect' type='submit'/> <br/>
 	
 	</form>
-	<%} %>
+
 </body>
 </html>
