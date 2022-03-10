@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class LifeCycleServlet
  */
-@WebServlet("/lifeCycleServlet")
+@WebServlet(urlPatterns = "/lifeCycleServlet", loadOnStartup = 1)
 public class LifeCycleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private String dbUrl; 
